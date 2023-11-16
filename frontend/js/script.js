@@ -62,18 +62,35 @@ const scrollScreen = () => {      // scroll automatico
     })
 }
 
-const processMessage =  ({ data }) => {
-    const { userId, userName, userColor, content} = JSON.parse(data)
+const processMessage = ({ data }) => {
+    const { userId, userName, userColor, content, image } = JSON.parse(data);
 
-    const message = 
-        userId == user.id 
-            ? createMessageSelfElement(content)
-            : createMessageOtherElement(content, userName, userColor)
+    if (image) {
+        const isOwnMessage = userId === user.id;
+        const messageContent = isOwnMessage ? "" : ``;
 
-    chatMessages.appendChild(message)
+        const message = isOwnMessage
+            ? createMessageSelfElement(messageContent)
+            : createMessageOtherElement(messageContent, userName, userColor);
 
-    scrollScreen() // sempre que receber mensagem, vai executar essa função
-}
+        const imageElement = document.createElement("img");
+        imageElement.src = image;
+        imageElement.alt = "Imagem recebida";
+        message.appendChild(imageElement);
+
+        message.classList.add("message--image");
+        chatMessages.appendChild(message);
+    } else if (content) {
+        const message =
+            userId == user.id
+                ? createMessageSelfElement(content)
+                : createMessageOtherElement(content, userName, userColor);
+
+        chatMessages.appendChild(message);
+    }
+
+    scrollScreen();
+};
 
 const handleLogin = (event) => {  // quando fizer o login
     event.preventDefault()
@@ -85,25 +102,42 @@ const handleLogin = (event) => {  // quando fizer o login
     login.style.display = "none"  // mostrar o chat
     chat.style.display = "flex"
 
-    websocket = new WebSocket("ws://localhost:8080") // e criar um conexão
+    websocket = new WebSocket("wss://chat-backend-2vm4.onrender.com") // e criar um conexão
     websocket.onmessage = processMessage
 
 }
 
 const sendMessage = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
+    const content = chatInput.value;
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+
+    // if(content || file) { 
     const message = {
         userId: user.id,
         userName: user.name,
         userColor: user.color,
-        content: chatInput.value
+        content: content,
+        image: null,
+    };
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            message.image = reader.result;
+            websocket.send(JSON.stringify(message));
+        };
+        reader.readAsDataURL(file);
+    } else {
+        websocket.send(JSON.stringify(message));
     }
 
-    websocket.send(JSON.stringify(message)) // transformar em uma string
-
-    chatInput.value = ""
-}
+    chatInput.value = "";
+    fileInput.value = ""; // Limpe o input de arquivo após o envio
+// }
+};
 
 loginForm.addEventListener("submit", handleLogin)
 chatForm.addEventListener("submit", sendMessage)
