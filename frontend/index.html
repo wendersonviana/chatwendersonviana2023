@@ -20,17 +20,19 @@
             </form>
         </section>
 
+        <div class="footer">
+            <p>&copy; 2023 Wenderson Viana. Todos os direitos reservados.</p>
+        </div>
+
         <section class="chat">
             <section class="chat__messages"></section>
 
             <form class="chat__form">
                 <input type="text" class="chat__input" placeholder="Digite uma mensagem"/>
                 <div>
-                    <label class="">
+                    <label class="imageicon">
                         <input accept="image/*" id="fileInput" name="file" type="file" style="display: none;" >
-                        <span class="material-symbols-outlined">
-                photo_library
-                </span>
+                        <span class="material-symbols-outlined">photo_library</span>
                     </label>
                     <label class="text-info" id="filename"></label>
                 </div>
@@ -39,6 +41,11 @@
                 </button>
             </form>
             
+            <div id="imageModal" class="modal">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img class="modal-content" id="expandedImage">
+            </div>
+
         </section>
 
     </section>

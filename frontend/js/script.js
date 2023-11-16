@@ -19,17 +19,21 @@ const colors = [
     "gold"
 ]
 
+const colorwhite = [
+    "white",
+]
+
 const user = { id: "", name: "", color: "" }
 
 let websocket 
 
-const createMessageSelfElement = (content) => {
-    const div = document.createElement("div")
+const createMessageSelfElement = (content, userName) => {
+    const div = document.createElement("div");
 
-    div.classList.add("message--self")
-    div.innerHTML = content
+    div.classList.add("message--self");
+    div.innerHTML = `<span class="message--sender" style="color: ${user.color};">${userName}</span>${content}`;
 
-    return div // return pra conseguir usar em outros lugares 
+    return div;
 }
 
 const createMessageOtherElement = (content, sender, senderColor) => {
@@ -70,12 +74,13 @@ const processMessage = ({ data }) => {
         const messageContent = isOwnMessage ? "" : ``;
 
         const message = isOwnMessage
-            ? createMessageSelfElement(messageContent)
+            ? createMessageSelfElement(messageContent, userName)
             : createMessageOtherElement(messageContent, userName, userColor);
 
         const imageElement = document.createElement("img");
         imageElement.src = image;
         imageElement.alt = "Imagem recebida";
+        imageElement.addEventListener("click", () => openImage(image));
         message.appendChild(imageElement);
 
         message.classList.add("message--image");
@@ -83,7 +88,7 @@ const processMessage = ({ data }) => {
     } else if (content) {
         const message =
             userId == user.id
-                ? createMessageSelfElement(content)
+                ? createMessageSelfElement(content,userName)
                 : createMessageOtherElement(content, userName, userColor);
 
         chatMessages.appendChild(message);
@@ -91,6 +96,18 @@ const processMessage = ({ data }) => {
 
     scrollScreen();
 };
+
+function openImage(image) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("expandedImage");
+    
+    modal.style.display = "block";
+    modalImg.src = image;
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
 
 const handleLogin = (event) => {  // quando fizer o login
     event.preventDefault()
