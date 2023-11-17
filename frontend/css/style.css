@@ -12,8 +12,34 @@
 }
 
 body {
-    background: url("../images/background.png");
+    background: url("../images/background.jpg") fixed;
     color: #f2f2f2;
+}
+
+.sign_up {
+    color: #737373;
+    font-size: 13px;
+}
+
+.sign_up a {
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.sign_up a:hover {
+    text-decoration: underline;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.remember span {
+    margin-right: 5px;
+    height: 20px;
 }
 
 .container {
@@ -140,6 +166,7 @@ body {
     color: #121212;
     border-radius: 10px 10px 0 10px;
     align-self: flex-end; 
+    word-wrap: break-word; 
 }
 
 .message--other {
@@ -154,6 +181,7 @@ body {
     margin-bottom: 15px;
     font-weight: 700;
     color: cadetblue;
+    word-wrap: break-word; 
 }
 
 .message--image img {
@@ -182,10 +210,11 @@ body {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 6px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    font-size: 10px;
 }
 
 /* Adicione essas regras CSS para estilizar a modal */

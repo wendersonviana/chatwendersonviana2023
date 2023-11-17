@@ -15,18 +15,14 @@ const colors = [
     "darkgoldenrod",
     "cornflowerblue",
     "darkkhaki",
-    "hotpink",
-    "gold"
-]
-
-const colorwhite = [
-    "white",
+    "hotpink"
 ]
 
 const user = { id: "", name: "", color: "" }
 
 let websocket 
 
+//EU
 const createMessageSelfElement = (content, userName) => {
     const div = document.createElement("div");
 
@@ -36,6 +32,8 @@ const createMessageSelfElement = (content, userName) => {
     return div;
 }
 
+
+// A OUTRA
 const createMessageOtherElement = (content, sender, senderColor) => {
     const div = document.createElement("div")
     const span = document.createElement("span")
@@ -49,7 +47,7 @@ const createMessageOtherElement = (content, sender, senderColor) => {
     div.appendChild(span)
 
     span.innerHTML = sender
-    div.innerHTML += content
+    div.innerHTML += content.replace(/\n/g, "<br>");
 
     return div // return pra conseguir usar em outros lugares 
 }
@@ -155,6 +153,11 @@ const sendMessage = (event) => {
     fileInput.value = ""; // Limpe o input de arquivo após o envio
 // }
 };
+
+function scrollToTop() {
+    // Rola até o início da conversa
+    document.getElementById('chat').scrollTop = 0;
+}
 
 loginForm.addEventListener("submit", handleLogin)
 chatForm.addEventListener("submit", sendMessage)

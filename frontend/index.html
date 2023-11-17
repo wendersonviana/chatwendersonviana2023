@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="images/favicon-32x32.png" type="image/x-icon">
     
-    <title>zipzipDoMkx</title>
+    <title>Chat do MKX</title>
 </head>
 <body>
     
@@ -16,14 +17,20 @@
         <section class="login">
             <h2>Login</h2>
             <form class="login__form">
-                <input type="text" class="login__input" placeholder="Seu nome" required /> <button type="submit" class="login__button">Entrar</button>
+                <input type="text" class="login__input" placeholder="Usuário" required /> 
+                
+                <input type="password" class="login__input" placeholder="Senha" required />
+
+                <button type="submit" class="login__button">Entrar</button>
+
+                <div class="sign_up"><p>Ainda não tem uma conta? <a href="#">Registrar</a></p></div>
             </form>
         </section>
 
         <div class="footer">
             <p>&copy; 2023 Wenderson Viana. Todos os direitos reservados.</p>
         </div>
-
+        
         <section class="chat">
             <section class="chat__messages"></section>
 
@@ -46,10 +53,7 @@
                 <img class="modal-content" id="expandedImage">
             </div>
 
-        </section>
-
-    </section>
-
     <script src="./js/script.js"></script>
+
 </body>
 </html>
