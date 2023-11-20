@@ -3,6 +3,11 @@ const login = document.querySelector(".login")
 const loginForm = login.querySelector(".login__form")
 const loginInput = login.querySelector(".login__input")
 
+//register elements
+const register = document.querySelector(".register")
+const registerForm = register.querySelector(".register__form")
+const registerInput = register.querySelector(".register__input")
+
 //chat elements
 const chat = document.querySelector(".chat")
 const chatForm = chat.querySelector(".chat__form")
@@ -107,6 +112,7 @@ function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
 
+// FUNÇÃO AO FAZER LOGIN
 const handleLogin = (event) => {  // quando fizer o login
     event.preventDefault()
 
@@ -117,8 +123,17 @@ const handleLogin = (event) => {  // quando fizer o login
     login.style.display = "none"  // mostrar o chat
     chat.style.display = "flex"
 
-    websocket = new WebSocket("wss://chat-backend-2vm4.onrender.com") // e criar um conexão
+    websocket = new WebSocket("ws://localhost:8080") // e criar um conexão
     websocket.onmessage = processMessage
+
+}
+
+// FUNÇÃO AO CLICAR EM REGISTRAR
+const handleRegister = (event) => {  // quando clicar em registar
+    event.preventDefault()
+
+    login.style.display = "none"  // mostrar o registro
+    register.style.display = "flex"
 
 }
 
@@ -159,5 +174,6 @@ function scrollToTop() {
     document.getElementById('chat').scrollTop = 0;
 }
 
-loginForm.addEventListener("submit", handleLogin)
+loginForm.addEventListener("submit", handleLogin) // ao clicar em submit vai realizar tarefa handleLogin
 chatForm.addEventListener("submit", sendMessage)
+registerForm.addEventListener("registerTela", handleRegister)

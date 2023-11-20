@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="images/favicon-32x32.png" type="image/x-icon">
     
+    
     <title>Chat do MKX</title>
 </head>
 <body>
@@ -23,14 +24,27 @@
 
                 <button type="submit" class="login__button">Entrar</button>
 
-                <div class="sign_up"><p>Ainda não tem uma conta? <a href="#">Registrar</a></p></div>
+                <div class="sign_up"><p>Ainda não tem uma conta? <a href="registerTela">Registrar</a></p></div>
             </form>
         </section>
+
 
         <div class="footer">
             <p>&copy; 2023 Wenderson Viana. Todos os direitos reservados.</p>
         </div>
         
+        <section class="register">
+            <h2>Cadastre-se</h2>
+            <form class="register__form">
+                <input type="text" class="register__input" placeholder="Usuário" required /> 
+                
+                <input type="password" class="register__input" placeholder="Senha" required />
+
+                <button type="submit" class="register__button">Registrar</button>
+
+            </form>
+        </section>
+
         <section class="chat">
             <section class="chat__messages"></section>
 
